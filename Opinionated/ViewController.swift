@@ -22,7 +22,9 @@ class ViewController: UIViewController, UITableViewDataSource {
         
         for (_, subJson) in json["articles"] {
             if let title = subJson["title"].string {
-                print(title)
+                if let author = subJson["author"].string {
+                    print(title + " by " + author)
+                }
             }
         }
     }
