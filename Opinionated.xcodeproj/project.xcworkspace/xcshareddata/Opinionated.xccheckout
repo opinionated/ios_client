@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>1294F535-B01A-4CCB-AD94-F5B9CDCE2137</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Opinionated</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>88575F0E7CD3463A4EBE4A65BFD73E802D00CE78</key>
+		<string>https://github.com/opinionated/ios_client.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Opinionated.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>88575F0E7CD3463A4EBE4A65BFD73E802D00CE78</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/opinionated/ios_client.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>88575F0E7CD3463A4EBE4A65BFD73E802D00CE78</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>88575F0E7CD3463A4EBE4A65BFD73E802D00CE78</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Opinionated</string>
+		</dict>
+	</array>
+</dict>
+</plist>

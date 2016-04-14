@@ -7,14 +7,26 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class ViewController: UIViewController, UITableViewDataSource {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        let jsonFilePath:NSString = NSBundle.mainBundle().pathForResource("articles", ofType: "json")!
+            let jsonData:NSData = NSData.dataWithContentsOfMappedFile(jsonFilePath as String) as! NSData
+            let error:NSError?
+            let json = JSON(data: jsonData)
+        
+        for (_, subJson) in json["articles"] {
+            if let title = subJson["title"].string {
+                print(title)
+            }
+        }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -27,10 +39,9 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         cell.textLabel?.text = repositories[indexPath.row]
         return cell
     }
-
+    
 }
-
