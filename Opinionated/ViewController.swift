@@ -11,11 +11,18 @@ import SwiftyJSON
 
 class ViewController: UIViewController, UITableViewDataSource {
     
+    @IBOutlet weak var lblTitle: UILabel!
     // Creates the array of articles that will be called for each individual cell
     // and creates the count of the articles, default to 0, which will decide
     // the amount of rows to create in the table view.
+    
     var articleArray = [String]()
     var count = 0
+    struct articleData {
+        var title:String
+        var author:String
+    }
+    var tableData = [articleData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +34,9 @@ class ViewController: UIViewController, UITableViewDataSource {
         let error:NSError?
         let json = JSON(data: jsonData)
         
+        for (_, subJson) in json["articles"] {
+            tableData.append(articleData(title: subJson["title"].string!, author: subJson["author"].string!))
+        }
         
         // Example json parse
 //        for (_, subJson) in json["articles"] {
@@ -50,10 +60,10 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-        cell.textLabel.numberOfLines = 0;
-        cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
-        cell.textLabel!.text = articleArray[indexPath.item]
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TableViewCell
+        //cell.textLabel!.text = articleArray[indexPath.item]
+        cell.lblTitle!.text = tableData[indexPath.row].title
+        cell.lblAuthor!.text = "by " + tableData[indexPath.row].author
         return cell
     }
     
