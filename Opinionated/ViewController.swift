@@ -8,10 +8,10 @@
 
 import UIKit
 import SwiftyJSON
+import WebImage
 
 class ViewController: UIViewController, UITableViewDataSource {
     
-    @IBOutlet weak var lblTitle: UILabel!
     // Creates the array of articles that will be called for each individual cell
     // and creates the count of the articles, default to 0, which will decide
     // the amount of rows to create in the table view.
@@ -21,6 +21,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     struct articleData {
         var title:String
         var author:String
+        var image:String
     }
     var tableData = [articleData]()
     
@@ -35,16 +36,8 @@ class ViewController: UIViewController, UITableViewDataSource {
         let json = JSON(data: jsonData)
         
         for (_, subJson) in json["articles"] {
-            tableData.append(articleData(title: subJson["title"].string!, author: subJson["author"].string!))
+            tableData.append(articleData(title: subJson["title"].string!, author: subJson["author"].string!, image: subJson["image"].string!))
         }
-        
-        // Example json parse
-//        for (_, subJson) in json["articles"] {
-//            let title = subJson["title"].string;
-//            articleArray.append(subJson["title"].string!)
-//            let author = subJson["author"].string;
-//            print(title! + " by " + author!);
-//        }
         
         count = json["articles"].count
         
@@ -61,9 +54,20 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TableViewCell
-        //cell.textLabel!.text = articleArray[indexPath.item]
+//        let url = NSURL(string: tableData[indexPath.row].image)
+//        let data = NSData(contentsOfURL:url!)
         cell.lblTitle!.text = tableData[indexPath.row].title
         cell.lblAuthor!.text = "by " + tableData[indexPath.row].author
+        print(tableData[indexPath.row].image)
+        if let url = NSURL(string: tableData[indexPath.row].image) {
+            if let data = NSData(contentsOfURL: url) {
+                cell.lblImage.image = UIImage(data: data)
+            }
+        }
+//        if data != nil {
+//            cell.lblImage!.image = UIImage(data: data!)
+//        }
+        
         return cell
     }
     

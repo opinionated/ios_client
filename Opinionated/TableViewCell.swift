@@ -12,6 +12,7 @@ class TableViewCell: UITableViewCell {
 
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblAuthor: UILabel!
+    @IBOutlet weak var lblImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
