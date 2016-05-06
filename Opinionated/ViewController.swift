@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-import WebImage
 
 class ViewController: UIViewController, UITableViewDataSource {
     
@@ -20,7 +19,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     var count = 0
     struct articleData {
         var title:String
-        var author:String
+        var byline:String
         var image:String
     }
     var tableData = [articleData]()
@@ -28,7 +27,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-
+        
         // Sets up the JSON to be read in Swift
         let jsonFilePath:NSString = NSBundle.mainBundle().pathForResource("articles", ofType: "json")!
         let jsonData:NSData = NSData.dataWithContentsOfMappedFile(jsonFilePath as String) as! NSData
@@ -36,7 +35,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         let json = JSON(data: jsonData)
         
         for (_, subJson) in json["articles"] {
-            tableData.append(articleData(title: subJson["title"].string!, author: subJson["author"].string!, image: subJson["image"].string!))
+            tableData.append(articleData(title: subJson["title"].string!, byline: subJson["author"].string! + " | " + subJson["date"].string!, image: subJson["image"].string!))
         }
         
         count = json["articles"].count
@@ -54,21 +53,36 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TableViewCell
-//        let url = NSURL(string: tableData[indexPath.row].image)
-//        let data = NSData(contentsOfURL:url!)
-        cell.lblTitle!.text = tableData[indexPath.row].title
-        cell.lblAuthor!.text = "by " + tableData[indexPath.row].author
-        print(tableData[indexPath.row].image)
-        if let url = NSURL(string: tableData[indexPath.row].image) {
-            if let data = NSData(contentsOfURL: url) {
-                cell.lblImage.image = UIImage(data: data)
-            }
-        }
-//        if data != nil {
-//            cell.lblImage!.image = UIImage(data: data!)
-//        }
         
+        cell.lblTitle!.text = tableData[indexPath.row].title
+        cell.lblAuthor!.text = "by " + tableData[indexPath.row].byline
+        
+        requestImage(tableData[indexPath.row].image) { (image) -> Void in
+            cell.lblImage.image = image
+        }
         return cell
     }
+    
+    func requestImage(url: String, success: (UIImage?) -> Void) {
+        requestURL(url, success: { (data) -> Void in
+            if let d = data {
+                success(UIImage(data: d))
+            }
+        })
+    }
+    
+    func requestURL(url: String, success: (NSData?) -> Void, error: ((NSError) -> Void)? = nil) {
+        NSURLConnection.sendAsynchronousRequest(
+            NSURLRequest(URL: NSURL (string: url)!),
+            queue: NSOperationQueue.mainQueue(),
+            completionHandler: { response, data, err in
+                if let e = err {
+                    error?(e)
+                } else {
+                    success(data)
+                }
+        })
+    }
+    
     
 }
