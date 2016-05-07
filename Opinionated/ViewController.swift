@@ -60,7 +60,21 @@ class ViewController: UIViewController, UITableViewDataSource {
         requestImage(tableData[indexPath.row].image) { (image) -> Void in
             cell.lblImage.image = image
         }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let destination = storyboard.instantiateViewControllerWithIdentifier("articleBody") as! articleBody
+        navigationController?.pushViewController(destination, animated: true)
+        
+        performSegueWithIdentifier("articleSegue", sender: self)
+
+        
         return cell
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if segue.identifier == "articleSegue" {
+            // Setup new view controller
+        }
     }
     
     func requestImage(url: String, success: (UIImage?) -> Void) {

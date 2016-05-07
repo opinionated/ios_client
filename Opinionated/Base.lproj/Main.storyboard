@@ -33,11 +33,11 @@
                                 <rect key="frame" x="0.0" y="72" width="375" height="595"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="192" id="Osc-35-EvE" customClass="TableViewCell" customModule="Opinionated">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="192" id="Osc-35-EvE" customClass="TableViewCell" customModule="Opinionated">
                                         <rect key="frame" x="0.0" y="22" width="375" height="192"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Osc-35-EvE" id="aiK-y2-3gG">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="191"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="191"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipG-io-3zm">
@@ -69,6 +69,7 @@
                                             <outlet property="lblAuthor" destination="ipG-io-3zm" id="4ai-za-Kix"/>
                                             <outlet property="lblImage" destination="AQG-Nf-aog" id="0CF-h0-ajX"/>
                                             <outlet property="lblTitle" destination="pwt-6W-fnM" id="2Q7-K2-xyj"/>
+                                            <segue destination="U98-Rf-l4P" kind="push" identifier="articleSegue" id="0K1-t1-aYe"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -94,6 +95,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="172.5" y="365.5"/>
+        </scene>
+        <!--articleBody-->
+        <scene sceneID="lnb-tI-3zS">
+            <objects>
+                <viewController storyboardIdentifier="articleBody" title="articleBody" id="U98-Rf-l4P" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VbH-di-O2r"/>
+                        <viewControllerLayoutGuide type="bottom" id="qlI-Hc-bL8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sLC-eD-zT4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <accessibility key="accessibilityConfiguration" identifier="articleBody" label="articleBody"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ZQX-bt-ZZL"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pua-JW-k0p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="672.5" y="365.5"/>
         </scene>
     </scenes>
 </document>
